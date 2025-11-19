@@ -5,6 +5,9 @@ import java.util.List;
 public class PlaylistRecommender {
 
     public static String classifyEnergy(List<Integer> bpms) {
+        if (bpms == null || bpms.isEmpty()) {
+            throw new IllegalArgumentException("bpm list cannot be null or empty");
+        }
         int avgBpm = 0;
         for (int bpm : bpms) {
             avgBpm += bpm;

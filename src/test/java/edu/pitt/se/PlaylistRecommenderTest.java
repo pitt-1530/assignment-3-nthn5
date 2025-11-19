@@ -7,6 +7,13 @@ import java.util.List;
 
 public class PlaylistRecommenderTest {
 
+    @Test 
+    public void bpmNull() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            PlaylistRecommender.classifyEnergy(null);
+        });
+        assertEquals("bpm list cannot be null or empty", exception.getMessage());}
+
     @Test
     public void bpm140() {
         assertEquals("HIGH", PlaylistRecommender.classifyEnergy(List.of(140, 150, 160)));
@@ -33,8 +40,13 @@ public class PlaylistRecommenderTest {
     }
 
     @Test
-    public void invalidTitleTooLong() { 
-        assertFalse(PlaylistRecommender.isValidTrackTitle("this title is fs more than thirty characters long so it aint valid"));
+    public void invalidTitle31Chars() { 
+        assertFalse(PlaylistRecommender.isValidTrackTitle("abcdefghijklmnopqrstuvwxyzabcde"));
+    }
+
+    @Test
+    public void validTitle30Chars() { 
+        assertTrue(PlaylistRecommender.isValidTrackTitle("abcdefghijklmnopqrstuvwxyzabcd"));
     }
 
     @Test
