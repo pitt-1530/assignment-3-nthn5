@@ -5,17 +5,33 @@ import java.util.List;
 public class PlaylistRecommender {
 
     public static String classifyEnergy(List<Integer> bpms) {
-        // TODO: Implement classifyEnergy()
-        throw new UnsupportedOperationException("Not implemented");
+        int avgBpm = 0;
+        for (int bpm : bpms) {
+            avgBpm += bpm;
+        }
+        avgBpm /= bpms.size();
+        if (avgBpm >= 140) {
+            return "HIGH";
+        } else if (avgBpm >= 100) {
+            return "MEDIUM";
+        } else {
+            return "LOW";
+        }
     }
 
     public static boolean isValidTrackTitle(String title) {
-        // TODO: Implement isValidTrackTitle()
-        throw new UnsupportedOperationException("Not implemented");
+        if (title == null || title.length() > 30 || title.isEmpty()) {
+            return false;
+        }
+        for (char c : title.toCharArray()) {
+            if (!Character.isLetter(c) && c != ' ') {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static int normalizeVolume(int volumeDb) {
-        // TODO: Implement normalizeVolume()
-        throw new UnsupportedOperationException("Not implemented");
+        return Math.clamp(volumeDb, 0, 100);
     }
 }
